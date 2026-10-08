@@ -2,23 +2,26 @@ const express = require("express");
 
 const app = express();
 
-const { adminAuth, userAuth } = require("./middlewares/auth");
-
-app.use("/admin", adminAuth);
-// app.use("/user", userAuth);
-
-app.get("/user/login", (req, res) => {
-  res.send("User login page");
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-app.get("/user/data", userAuth, (req, res) => {
+app.get("/getUserData", (req, res) => {
+  // try {
+  //   throw new Error("gfhtgfh");
+  // } catch (err) {
+  //   res.status(500).send("something went wrong");
+  // }
+  throw new Error("gfhtgfh");
   res.send("User data sent");
 });
-app.get("/admin/getAllData", (req, res) => {
-  res.send("All data sent");
-});
-app.get("/admin/deleteUser", (req, res) => {
-  res.send("Delete a user");
+
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.listen(3000, () => {
